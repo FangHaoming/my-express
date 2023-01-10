@@ -22,15 +22,15 @@ app.get('*', function routeHandler(req, res, next) {
 })
 // 处理全局报错
 app.use(function (err, req, res, next) {
+  console.log(process.env.email_host)
   const emailGenerator = new EmailGenerator({
-    host: "smtp.exmail.qq.com",
+    host: process.env.email_host,
     port: 465,
     secure: true,
     user: 'fanghaoming@rayvision.com',
-    pass: 'Sdarmin1',
+    pass: process.env.email_pass,
   })
   const backupContent = emailGenerator.createContent({
-    from: 'my-koa <fanghaoming@rayvision.com>',
     subject: `【服务器报错啦！】`,
     text: error.message
   })
