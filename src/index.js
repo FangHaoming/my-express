@@ -32,7 +32,7 @@ app.use(function (err, req, res, next) {
   })
   const backupContent = emailGenerator.createContent({
     subject: `【服务器报错啦！】`,
-    text: error.message
+    text: err.message
   })
   emailGenerator.send(backupContent, ['fanghaoming@rayvision.com'])
   res.status(err.status || 500);
