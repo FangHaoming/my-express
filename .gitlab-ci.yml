@@ -17,6 +17,6 @@ build:
       - main
   script:
     - ssh-add <(echo "$PRIVATE_KEY")
-    - ssh root@175.178.22.67 "cd /www/my-server/my-express && git pull && yarn install"
+    - ssh root@175.178.22.67 "cd /www/my-server/my-express && yarn install"
     - ssh root@175.178.22.67 "pm2 stop my-express"
     - ssh root@175.178.22.67 "pm2 start /www/my-server/my-express/src/index.js --name my-express"
