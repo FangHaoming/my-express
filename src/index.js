@@ -31,7 +31,7 @@ app.use(function (err, req, res, next) {
     pass: process.env.email_pass,
   })
   const backupContent = emailGenerator.createContent({
-    subject: `【服务器报错啦！】`,
+    subject: `【my-express服务器报错啦！】`,
     text: err.message
   })
   emailGenerator.send(backupContent, ['fanghaoming@rayvision.com'])
