@@ -27,14 +27,14 @@ app.use(function (err, req, res, next) {
     host: process.env.email_host,
     port: 465,
     secure: true,
-    user: 'fanghaoming@rayvision.com',
+    user: process.env.email_user,
     pass: process.env.email_pass,
   })
   const backupContent = emailGenerator.createContent({
     subject: `【my-express服务器报错啦！】`,
     text: err.message
   })
-  emailGenerator.send(backupContent, ['fanghaoming@rayvision.com'])
+  emailGenerator.send(backupContent, [process.env.email_user])
   res.status(err.status || 500);
   res.json({
     errors: {
