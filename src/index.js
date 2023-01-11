@@ -22,7 +22,6 @@ app.get('*', function routeHandler(req, res, next) {
 })
 // 处理全局报错
 app.use(function (err, req, res, next) {
-  console.log(process.env.email_host)
   const emailGenerator = new EmailGenerator({
     host: process.env.email_host,
     port: 465,
@@ -31,8 +30,8 @@ app.use(function (err, req, res, next) {
     pass: process.env.email_pass,
   })
   const backupContent = emailGenerator.createContent({
-    subject: `【my-express服务器报错啦！】`,
-    text: err.message
+    subject: `【${err.project}】服务器报错啦！`,
+    text: JSON.stringify(err)
   })
   emailGenerator.send(backupContent, [process.env.email_user])
   res.status(err.status || 500);
